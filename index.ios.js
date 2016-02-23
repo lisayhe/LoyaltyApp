@@ -2,50 +2,125 @@
  * Sample React Native App
  * https://github.com/facebook/react-native
  */
+
 'use strict';
 import React, {
   AppRegistry,
   Component,
   StyleSheet,
+  Image,
   Text,
-  View
+  View, 
+  ListView,
+  DatePickerIOS,
+  Date,
 } from 'react-native';
 
+/*var React = require('react-native');
+var {
+  Navigator,
+  ScrollView,
+
+
+  TouchableHighlight,
+} = React;
+*/
+var REQUEST_URL = 'http://dev.bruinmobile.com/restaurants.json';
+
 class LoyaltyApp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data:{},
+      loaded: false,
+    };
+  }
+ 
+  componentDidMount() {
+    this.fetchData();
+  }
+ 
+  fetchData() {
+    fetch(REQUEST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          data: responseData,
+          loaded: true,
+        });
+      })
+      .done();
+  }
+ 
   render() {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
+ 
+    return (
+      this.renderRestaurant(this.state.data)
+    );
+  }
+ 
+  renderLoadingView() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+        <Text>
+          Loading Restaurants...
         </Text>
       </View>
     );
   }
+ 
+  renderRestaurant(myrestaurant) {
+    return (
+     /* <View style={styles.container}>
+        <Image
+          source={{uri: 'PICTUREURI'}}
+          style={styles.thumbnail}/>
+          */
+        <View style={styles.rightContainer}>
+          <Text style={styles.title}>{myrestaurant.Name}</Text>
+          <Text style={styles.year}>{myrestaurant.Address}</Text>
+           <Text style={styles.year}>{myrestaurant.Hours}</Text>
+            <Text style={styles.year}>{myrestaurant.Category}</Text>
+        </View>
+      //</View>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
+ 
+var styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    borderLeftWidth: 20,
+    borderLeftColor: '#F5FCFF',
   },
-  welcome: {
+  rightContainer: {
+    flex: 1,
+    borderLeftWidth: 50,
+    borderLeftColor: '#F5FCFF',
+  },
+  title: {
     fontSize: 20,
+    marginBottom: 8,
     textAlign: 'center',
-    margin: 10,
   },
-  instructions: {
+  year: {
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    color: 'blue',
+  },
+  thumbnail: {
+    width: 53,
+    height: 81,
+  },
+  listView: {
+    paddingTop: 20,
+    backgroundColor: '#F5FCFF',
   },
 });
 

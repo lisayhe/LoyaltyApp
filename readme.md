@@ -23,6 +23,8 @@ Text,
   TouchableHighlight,
 } = React;
 
+REQUEST_URL = ''
+
 class LoyaltyApp extends Component {
   constructor(props) {
     super(props);
@@ -75,10 +77,10 @@ class LoyaltyApp extends Component {
           source={{uri: 'PICTUREURI'}}
           style={styles.thumbnail}/>
         <View style={styles.rightContainer}>
-          <Text style={styles.title}>{myrestaurant.name}</Text>
-          <Text style={styles.year}>{myrestaurant.address}</Text>
-           <Text style={styles.year}>{myrestaurant.hours}</Text>
-            <Text style={styles.year}>{myrestaurant.category}</Text>
+          <Text style={styles.title}>{myrestaurant.Name}</Text>
+          <Text style={styles.year}>{myrestaurant.Address}</Text>
+           <Text style={styles.year}>{myrestaurant.Hours}</Text>
+            <Text style={styles.year}>{myrestaurant.Category}</Text>
         </View>
       </View>
     );
