@@ -80,7 +80,12 @@ class LoyaltyApp extends Component {
   renderRestaurant(myrestaurant) {
     return (
       <View style={styles.container}>
-        
+        /*
+ <Image
+          source={{uri: movie.posters.thumbnail}}
+          style={styles.thumbnail}/>
+          */
+
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{myrestaurant.Name}</Text>
           <Text style={styles.year}>{myrestaurant.Address}</Text>
