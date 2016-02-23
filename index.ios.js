@@ -28,10 +28,12 @@ var {
 var REQUEST_URL = 'http://dev.bruinmobile.com/restaurants.json';
 
 class LoyaltyApp extends Component {
-  constructor(props) {
+    constructor(props) {
     super(props);
     this.state = {
-      data:{},
+      dataSource: new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      }),
       loaded: false,
     };
   }
@@ -45,7 +47,7 @@ class LoyaltyApp extends Component {
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
-          data: responseData,
+          dataSource: this.state.dataSource.cloneWithRows(responseData.restaurant),
           loaded: true,
         });
       })
@@ -58,7 +60,10 @@ class LoyaltyApp extends Component {
     }
  
     return (
-      this.renderRestaurant(this.state.data)
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this.renderRestaurant}
+        style={styles.listView}/>
     );
   }
  
@@ -66,7 +71,7 @@ class LoyaltyApp extends Component {
     return (
       <View style={styles.container}>
         <Text>
-          Loading Restaurants...
+          Loading restaurants...
         </Text>
       </View>
     );
@@ -74,18 +79,13 @@ class LoyaltyApp extends Component {
  
   renderRestaurant(myrestaurant) {
     return (
-     /* <View style={styles.container}>
-        <Image
-          source={{uri: 'PICTUREURI'}}
-          style={styles.thumbnail}/>
-          */
+      <View style={styles.container}>
+        
         <View style={styles.rightContainer}>
           <Text style={styles.title}>{myrestaurant.Name}</Text>
           <Text style={styles.year}>{myrestaurant.Address}</Text>
-           <Text style={styles.year}>{myrestaurant.Hours}</Text>
-            <Text style={styles.year}>{myrestaurant.Category}</Text>
         </View>
-      //</View>
+      </View>
     );
   }
 }
