@@ -1,0 +1,28 @@
+{"total":3, 
+	"restaurant":[
+		{
+		"Name":"Westwood Pizzeria",
+		"Address":"10974 Le Conte Ave, Los Angeles, CA 90024",
+		"Hours":"11AM-10PM",
+		"Category":"Italian",
+		"ID":0,
+		"Phone": "(310)443-0123"
+		},
+		{
+		"Name":"Yamato Westwood",
+		"Address":"1099 Westwood Blvd, Los Angeles, CA 90024",
+		"Hours":"11:30AM-2:30PM, 5-10PM",
+		"Category":"Japanese",
+		"ID":1,
+		"Phone": "(310)208-0100"
+		},
+		{
+		"Name":"TLT Food",
+		"Address":"1116 Westwood Blvd, Los Angeles, CA 90024",
+		"Hours":"11AM-10PM",
+		"Category":"Fusion",
+		"ID":2,
+		"Phone": "(310)443-4433"
+		}
+	]
+}
